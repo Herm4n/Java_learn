@@ -11,7 +11,7 @@ public class MenuTest extends JFrame implements ActionListener
 {
 	JMenuBar menuBar;
 	JMenu menuPlik, menuNarzedzia, menuPomoc;
-	JMenuItem mOtworz, mZapisz, mZamknij, mNarz1, mNarz2, mOPrograme, mStronaWWW;
+	JMenuItem mOtworz, mZapisz, mZamknij, mNarz1, mNarz2, mNarz3, mOPrograme, mStronaWWW;
 	
 	public MenuTest()
 	{
@@ -30,6 +30,14 @@ public class MenuTest extends JFrame implements ActionListener
 		menuBar.add(menuPlik);
 		menuBar.add(menuNarzedzia);
 		menuBar.add(menuPomoc);
+		
+		mOtworz = new JMenuItem("Otworz");
+		mZapisz = new JMenuItem("Zapisz");
+		mZamknij = new JMenuItem("Zamknij");
+		menuPlik.add(mOtworz);
+		menuPlik.add(mZapisz);
+		menuPlik.add(mZamknij);
+		
 	}
 
 	@Override
