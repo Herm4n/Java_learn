@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 
@@ -32,7 +33,12 @@ public class RownanieGUI extends JFrame implements ActionListener
 				
 			} catch (Exception e2)
 			{
-				lblW.setText("Niepoprawne dane wejsciowe");
+				JOptionPane.showMessageDialog(this, "Niepoprawne dane wejsciowe");
+				txfA.setText("");
+				txfB.setText("");
+				txfC.setText("");
+				lblW.setText("");
+//				lblW.setText("Niepoprawne dane wejsciowe");
 			}
 		}
 		else if (zrodlo == btnWyczysc)

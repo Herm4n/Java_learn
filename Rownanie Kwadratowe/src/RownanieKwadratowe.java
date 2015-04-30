@@ -100,7 +100,7 @@ public class RownanieKwadratowe
 		{
 			double x1 = (-getB() - Math.sqrt(delta)) / 2*getA();
 			double x2 = (-getB() + Math.sqrt(delta)) / 2*getA();
-			rozwiazanie = "Równanie ma dwa rozwi¹zania: x1 = "+ zaokraglij(x1) + ", x2 = " + zaokraglij(x2);
+			rozwiazanie = "Równanie ma dwa rozwi¹zania: x1 = "+ String.format("%.2f", x1) + ", x2 = " + String.format("%.2f", x2);
 		}
 		else if (delta == 0 )
 		{
@@ -114,7 +114,7 @@ public class RownanieKwadratowe
 		
 		return rozwiazanie;
 	}
-	
+//	zaokraglanie w tej implementaji nie uzywane
 	private double zaokraglij(double xx)
 	{
 		BigDecimal z = new BigDecimal(xx).setScale(2, BigDecimal.ROUND_CEILING);
