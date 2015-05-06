@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,12 +12,15 @@ import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JColorChooser;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -26,12 +30,15 @@ import javax.swing.KeyStroke;
 public class MenuTest extends JFrame implements ActionListener
 {
 	JMenuBar menuBar;
-	JButton btnSzukaj;
+	JButton btnSzukaj, btnWybierzKolor;
 	JTextField txfSzukany;
+	JPopupMenu popMenu;
 	JMenu menuPlik, menuNarzedzia, menuPomoc, menuPodmenu, menuOpcje;
-	JMenuItem mOtworz, mZapisz, mZamknij, mNarz1, mNarz2, mNarz3, mOPrograme, mStronaWWW, mOpcja1, mOpcja2;
+	JMenuItem mOtworz, mZapisz, mZamknij, mNarz1, mNarz2, mNarz3, mOPrograme, mStronaWWW, mOpcja1, mOpcja2, mpoKopiuj, mpoWklej, mpoDolacz;
 	JCheckBoxMenuItem cbmOpcja1, cbmOpcja2;
+	JComboBox<String> cbxKolorKombo;
 	JTextArea notatnik;
+	String wybranyTekst;
 	
 	public MenuTest()
 	{
@@ -103,6 +110,34 @@ public class MenuTest extends JFrame implements ActionListener
 			menuPodmenu.add(mStronaWWW);
 			mStronaWWW.addActionListener(this);
 		menuPomoc.add(menuPodmenu);
+		
+//		POPUP MENU
+		
+		popMenu = new JPopupMenu();
+		mpoDolacz = new JMenuItem("Dolacz");
+		mpoDolacz.addActionListener(this);
+		
+		mpoKopiuj = new JMenuItem("Kopiuj");
+		mpoKopiuj.addActionListener(this);
+		
+		mpoWklej = new JMenuItem("Wklej");
+		mpoWklej.addActionListener(this);
+		
+		popMenu.add(mpoDolacz);
+		popMenu.add(mpoKopiuj);
+		popMenu.add(mpoWklej);
+		
+//		COMBOBOX
+		cbxKolorKombo = new JComboBox<String>();
+		cbxKolorKombo.setBounds(50, 500, 100, 25);
+		cbxKolorKombo.addItem("czarny");
+		cbxKolorKombo.addItem("rozowy");
+		cbxKolorKombo.addItem("niebieski");
+		cbxKolorKombo.addItem("pomaranczowy");
+		cbxKolorKombo.addActionListener(this);
+		
+		add(cbxKolorKombo);
+		
 //		********************************* //IMPLEMENTACJA MENU ***********************************
 		
 		
@@ -115,6 +150,7 @@ public class MenuTest extends JFrame implements ActionListener
 		JScrollPane scrollPane = new JScrollPane(notatnik);
 		scrollPane.setBounds(0, 0, 500, 500);
 		add(scrollPane);
+		notatnik.setComponentPopupMenu(popMenu);
 		
 //		********************************* //Pole tekstowe wielolinijkowe *************************
 //		********************************* Szukajka ***********************************************
@@ -126,7 +162,12 @@ public class MenuTest extends JFrame implements ActionListener
 		txfSzukany.setBounds(220, 530, 150, 25);
 		add(txfSzukany);
 //		********************************* //Szukajka *********************************************
-		
+//		******************************** Zmiana kolorow ******************************************
+		btnWybierzKolor = new JButton("Wybierz Kolor");
+		btnWybierzKolor.setBounds(50, 560, 150, 25);
+		btnWybierzKolor.addActionListener(this);
+		add(btnWybierzKolor);
+//		******************************** //Zmiana kolorow ****************************************
 //		********************************* //ELEMENTY OKNA ****************************************
 	}
 //	******************************************************************************************
@@ -168,7 +209,13 @@ public class MenuTest extends JFrame implements ActionListener
 			JOptionPane.showMessageDialog(null, szukane + " wystapilo " + i + " razy: " + wystapienia);
 		}
 //		******************************** //obsluga szukajki ****************************************
-		
+//		******************************** wybierz kolor *********************************************
+		else if (zrodlo == btnWybierzKolor)
+		{
+			Color wybranyKolor = JColorChooser.showDialog(null, "Wybor koloru", Color.GREEN);
+			notatnik.setForeground(wybranyKolor);
+		}
+//		******************************** //wybierz kolor *******************************************
 //		******************************** OTWIERANIE PLIKU ******************************************
 		else if (zrodlo == mOtworz)
 		{
@@ -262,7 +309,32 @@ public class MenuTest extends JFrame implements ActionListener
 				e1.printStackTrace();
 			}
 		}
-		
+		else if (zrodlo == mpoKopiuj)
+		{
+			wybranyTekst = notatnik.getSelectedText();
+		}
+		else if (zrodlo == mpoWklej)
+		{
+			notatnik.insert(wybranyTekst, notatnik.getCaretPosition());
+		}
+		else if (zrodlo == mpoDolacz)
+		{
+			notatnik.append("\n" + wybranyTekst);
+		}
+		else if (zrodlo == cbxKolorKombo)
+		{
+			String kolor = cbxKolorKombo.getSelectedItem().toString();
+			if (kolor.equals("czarny"))
+					notatnik.setForeground(Color.BLACK);
+			else if (kolor.equals("rozowy"))
+				notatnik.setForeground(Color.PINK);
+			else if (kolor.equals("niebieski"))
+				notatnik.setForeground(Color.BLUE);
+			else if (kolor.equals("pomaranczowy"))
+				notatnik.setForeground(Color.ORANGE);
+			
+			
+		}
 	}
 //		********************************* //OBSLUGA AKCJI ******************************************
 
