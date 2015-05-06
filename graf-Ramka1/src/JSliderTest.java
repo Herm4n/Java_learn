@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -45,6 +47,20 @@ public class JSliderTest extends JFrame implements ChangeListener
 		lblFah = new JLabel("Fahrenheit: 0");
 		lblFah.setBounds(550, 150, 250, 25);
 		add(lblFah);
+		
+		// *************************************************************************************
+		// **************************** Zmiana stylu graficznego okna **************************
+		// *************************************************************************************
+		try
+		{
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		} 
+		catch (Exception e)
+		{
+			// TODO: handle exception
+		}
+		SwingUtilities.updateComponentTreeUI(this);
+		// ***************************************
 	}
 	public static void main(String[] args)
 	{
