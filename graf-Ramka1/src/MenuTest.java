@@ -39,7 +39,8 @@ public class MenuTest extends JFrame implements ActionListener
 	JComboBox<String> cbxKolorKombo;
 	JTextArea notatnik;
 	String wybranyTekst;
-	
+//********************************** testowy komentarz *************************
+	//********************************** testowy komentarz *************************
 	public MenuTest()
 	{
 		setTitle("Demonstracja JMenuBar");
@@ -105,7 +106,7 @@ public class MenuTest extends JFrame implements ActionListener
 		mOPrograme = new JMenuItem("O programie");
 		mOPrograme.addActionListener(this);
 		menuPomoc.add(mOPrograme);
-			menuPodmenu = new JMenu("Wiêcej");
+			menuPodmenu = new JMenu("Wiï¿½cej");
 			mStronaWWW = new JMenuItem("Storna WWW");
 			menuPodmenu.add(mStronaWWW);
 			mStronaWWW.addActionListener(this);
@@ -291,7 +292,7 @@ public class MenuTest extends JFrame implements ActionListener
 		else if (zrodlo == mOPrograme)
 		{
 			JOptionPane.showMessageDialog(this, "Program demonstruje uzycie menu przez wykorzystanie \n JMenuBar i JMenu. "
-					+ " No i to jest ca³kiem ciekawe. \n \n \n Wersja 1.0", "Tytul", JOptionPane.INFORMATION_MESSAGE);
+					+ " No i to jest caï¿½kiem ciekawe. \n \n \n Wersja 1.0", "Tytul", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (zrodlo == mStronaWWW)
 		{
